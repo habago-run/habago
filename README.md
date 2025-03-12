@@ -1,38 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 哈巴狗 - 面向 AI 的下一代全栈开发框架
 
-## Getting Started
+## 项目介绍
 
-First, run the development server:
+哈巴狗是一个面向 AI 的下一代全栈开发框架，旨在帮助个人开发者或小型团队更快速地构建现代应用程序。包括但不限于：
+
+- Admin 管理后台
+- 小程序
+- 网站
+- APP
+- 电商
+- 各类企业管理系统 CRM HRM OA 等
+
+## 设计理念
+
+- **AI 优先**：哈巴狗的设计理念是，唯快不破。我们希望通过现代的 AI 的协助，仅通过简单的需求提示词，AI 就能帮我们完成从后端数据库定义，到前端页面渲染的一整套代码。
+- **插件系统**：哈巴狗的所有功能都是通过插件来实现的。支持在运行时动态加载插件， 从而做到 0 维护，0 代码升级和添加功能。
+- **直接上线**：哈巴狗是生产环境 ready 的，可以 0 代码定制直接部署上线。
+
+## 快速开始
+
+你需要准备一个安装了 docker 的服务器，然后执行以下命令：
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+docker run -p 3000:3000 -d habago/habago:latest
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Docker 的安装可以参考这里
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 安装模块
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+哈巴狗内置了一些插件：
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-> > > > > > > fb1f164 (Initial commit from Create Next App)
+- 系统用户管理
+- 权限管理
+- 插件管理
+- 租户管理
