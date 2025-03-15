@@ -4,7 +4,7 @@
     "version": "0.1.0",
     "scripts": {
         "dev": "pnpm -C admin dev",
-        "build": "pnpm -C admin build",
+        "build": "pnpm -r --parallel build",
         "lint": "pnpm -C admin lint",
         "start": "pnpm -C server start",
         "debug": "pnpm -C server debug"

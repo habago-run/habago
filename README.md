@@ -31,9 +31,9 @@ docker run -p 3000:3000 -d habago/habago:latest
 version: "3"
 services:
   habago:
-    image: habago/habago:latest
+    image: habago/admin:latest
     ports:
-      - 3000:3000
+      - 3001:3000
 ```
 
 ## 安装模块

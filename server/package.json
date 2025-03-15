@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
+    "start": "tsx prisma/seed.ts && tsx index.ts",
+    "build": "pnpm generate && pnpm migrate",
+    "generate": "prisma generate",
     "migrate": "prisma migrate deploy",
-    "start": "pnpm run migrate && tsx prisma/seed.ts && tsx index.ts",
-    "debug": "tsx --inspect index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "debug": "tsx --inspect index.ts"
   },
   "author": "wangyu@wycode.cn",
   "license": "ISC",
