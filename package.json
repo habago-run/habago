@@ -9,5 +9,8 @@
         "build:server": "pnpm -C server build",
         "start:server": "pnpm -C server start"
     },
-    "packageManager": "pnpm@10.6.3"
+    "packageManager": "pnpm@10.6.3",
+    "dependencies": {
+        "next": "15.2.2"
+    }
 }
