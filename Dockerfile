@@ -8,6 +8,9 @@ COPY . .
 RUN npm install -g pnpm
 # 安装依赖
 RUN pnpm install --frozen-lockfile
+# 环境变量
+ENV NODE_ENV production
+ENV DATABASE_URL file:./habago.db
 # 构建项目
 RUN pnpm build
 # 暴露端口
