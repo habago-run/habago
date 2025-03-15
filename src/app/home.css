@@ -1,0 +1,15 @@
+@keyframes gradient {
+  0% {
+    background-position: 200% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background: linear-gradient(90deg, oklch(0.592 0.249 0.584), oklch(0.558 0.288 302.321), oklch(0.511 0.262 276.966),oklch(0.558 0.288 302.321), oklch(0.592 0.249 0.584));
+  animation: gradient 3s linear infinite;
+  background-size: 200% 100%;
+  background-clip: text;
+}

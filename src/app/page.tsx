@@ -1,65 +1,40 @@
-import Image from "next/image";
+"use client";
+
+import Link from "next/link";
+import { useEffect } from "react";
+
+import DarkModeSwitch from "@/components/DarkModeSwitch";
+import "./home.css";
 
 export default function Home() {
+  useEffect(() => {
+    // TODO 加载模块信息，获取路由，重定向用户到首页插件
+    const loadPortalModule = async () => { };
+    loadPortalModule();
+  }, []);
+
   return (
-    <div className="flex flex-col justify-center min-h-screen p-8 bg-[url(/bg.svg)] bg-cover bg-center">
-      <main className="flex-1 flex justify-center">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-      </main>
-      <footer className="flex gap-8 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <main className="flex min-h-screen flex-col justify-center bg-[url(/bg.svg)] bg-cover bg-center p-8 transition-colors duration-3000">
+      <div className="flex justify-end">
+        <DarkModeSwitch />
+      </div>
+      <div className="flex flex-1 flex-col justify-center gap-4">
+        <h1 className="animate-gradient mx-auto text-center text-6xl font-bold text-transparent">
+          哈巴狗
+        </h1>
+        <p className="text-center text-slate-800 transition-colors dark:text-slate-100">
+          尚未配置首页插件，去
+          <Link
+            className="font-bold text-blue-600 underline"
+            href="/admin/dashboard"
+          >
+            后台管理
+          </Link>
+        </p>
+        <p className="text-center text-slate-800 transition-colors dark:text-slate-100">
+          可以管理页面安装首页插件或禁用此导航页
+        </p>
+      </div>
+    </main>
   );
 }
