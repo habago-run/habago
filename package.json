@@ -2,15 +2,18 @@
     "name": "habago",
     "private": true,
     "scripts": {
-        "dev:admin": "pnpm -C admin dev",
-        "build:admin": "pnpm -C admin build",
-        "start:admin": "pnpm -C admin start",
-        "lint:admin": "pnpm -C admin lint",
-        "build:server": "pnpm -C server build",
-        "start:server": "pnpm -C server start"
+        "dev": "pnpm -C admin dev",
+        "build": "pnpm -C admin build",
+        "lint": "pnpm -C admin lint",
+        "start": "pnpm -C server start",
+        "debug": "pnpm -C server debug"
     },
-    "packageManager": "pnpm@10.6.3",
     "dependencies": {
         "next": "15.2.2"
-    }
+    },
+    "devDependencies": {
+        "@types/node": "^20",
+        "typescript": "^5"
+    },
+    "packageManager": "pnpm@10.6.3"
 }

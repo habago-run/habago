@@ -1,11 +1,26 @@
 {
   "name": "habago-server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
+    "migrate": "prisma migrate deploy",
+    "start": "pnpm run migrate && tsx prisma/seed.ts && tsx index.ts",
+    "debug": "tsx --inspect index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "wangyu@wycode.cn",
   "license": "ISC",
-  "description": "Node server for Habago"
+  "description": "Node server for Habago",
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.5.0",
+    "http-proxy": "^1.18.1",
+    "prisma": "^6.5.0",
+    "tsx": "^4.19.3"
+  },
+  "devDependencies": {
+    "@types/http-proxy": "^1.17.16"
+  }
 }
