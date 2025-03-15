@@ -1,17 +1,9 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect } from "react";
 
 import DarkModeSwitch from "@/components/DarkModeSwitch";
 import "./home.css";
 
 export default function Home() {
-  useEffect(() => {
-    // TODO 加载模块信息，获取路由，重定向用户到首页插件
-    const loadPortalModule = async () => { };
-    loadPortalModule();
-  }, []);
 
   return (
     <main className="flex min-h-screen flex-col justify-center bg-[url(/bg.svg)] bg-cover bg-center p-8 transition-colors duration-3000">
@@ -25,7 +17,7 @@ export default function Home() {
         <p className="text-center text-slate-800 transition-colors dark:text-slate-100">
           尚未配置首页插件，去
           <Link
-            className="font-bold text-blue-600 underline"
+            className="font-bold text-blue-600 underline mx-1"
             href="/admin/dashboard"
           >
             后台管理
