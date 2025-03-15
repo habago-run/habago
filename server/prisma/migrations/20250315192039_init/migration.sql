@@ -9,7 +9,6 @@ CREATE TABLE "Plugin" (
     "default" BOOLEAN NOT NULL,
     "enabled" BOOLEAN NOT NULL,
     "server" TEXT NOT NULL,
-    "order" INTEGER NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );

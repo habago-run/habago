@@ -18,7 +18,6 @@ async function main() {
       default: true,
       enabled: true,
       server: "localhost:3001",
-      order: 1,
     },
   });
   console.log("seed successfully", plugin);
