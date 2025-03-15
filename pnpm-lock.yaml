@@ -6,7 +6,9 @@ settings:
 
 importers:
 
-  .:
+  .: {}
+
+  admin:
     dependencies:
       '@heroicons/react':
         specifier: ^2.2.0
@@ -63,6 +65,8 @@ importers:
       typescript:
         specifier: ^5
         version: 5.8.2
+
+  server: {}
 
 packages:
 
