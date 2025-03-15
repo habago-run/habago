@@ -1,12 +1,10 @@
 import { createServer, IncomingMessage, ServerResponse } from "http";
 import { parse, UrlWithParsedQuery } from "url";
-import path from "path";
 import next from "next";
 import { PrismaClient, Plugin, Route } from "@prisma/client";
 import httpProxy from "http-proxy";
 
-const dir = path.join(process.cwd(), "../admin");
-const app = next({ dev: false, dir });
+const app = next({ dev: false, dir: "../admin" });
 const handle = app.getRequestHandler();
 const proxy = httpProxy.createProxyServer();
 const prisma = new PrismaClient();

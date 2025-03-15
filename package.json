@@ -1,6 +1,7 @@
 {
     "name": "habago",
     "private": true,
+    "version": "0.1.0",
     "scripts": {
         "dev": "pnpm -C admin dev",
         "build": "pnpm -C admin build",
