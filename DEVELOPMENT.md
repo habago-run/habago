@@ -14,5 +14,5 @@ pnpm install
 ## 启动开发环境
 
 ```bash
-pnpm admin:dev
+pnpm dev
 ```

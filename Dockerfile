@@ -9,7 +9,7 @@ RUN npm install -g pnpm
 # 安装依赖
 RUN pnpm install --frozen-lockfile
 # 构建项目
-RUN pnpm run build
+RUN pnpm build
 # 暴露端口
 EXPOSE 3001
 
