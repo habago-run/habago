@@ -7,7 +7,8 @@
         "build": "pnpm -r --parallel build",
         "build:admin": "pnpm -C admin build",
         "build:server": "pnpm -C server build",
-        "lint": "pnpm -C admin lint",
+        "lint": "pnpm -r --parallel lint",
+        "test": "pnpm -r --parallel test",
         "start": "pnpm -C server start",
         "debug": "pnpm -C server debug"
     },
