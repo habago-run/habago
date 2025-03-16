@@ -53,7 +53,7 @@ async function start() {
       process.exit(1);
     })
     .listen(3001, () => {
-      console.log("server started on 3001");
+      console.log("server started on http://localhost:3001");
     });
 }
 

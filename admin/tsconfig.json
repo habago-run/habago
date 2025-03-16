@@ -25,7 +25,8 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ]
+      ],
+      "@shared/*": ["../shared/*"]
     }
   },
   "include": [
@@ -34,7 +35,8 @@
     ".next/types/**/*.ts",
     "next-env.d.ts",
     "src/components/Icons.jsx",
-    "../dist/types/**/*.ts"
+    "../shared/**/*.ts",
+    "../shared/**/*.tsx"
   ],
   "exclude": [
     "node_modules"

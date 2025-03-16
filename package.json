@@ -5,6 +5,8 @@
     "scripts": {
         "dev": "pnpm -C admin dev",
         "build": "pnpm -r --parallel build",
+        "build:admin": "pnpm -C admin build",
+        "build:server": "pnpm -C server build",
         "lint": "pnpm -C admin lint",
         "start": "pnpm -C server start",
         "debug": "pnpm -C server debug"

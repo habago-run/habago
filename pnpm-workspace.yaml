@@ -1,3 +1,11 @@
 packages:
-  - "admin"
-  - "server"
+  - admin
+  - server
+  - shared
+onlyBuiltDependencies:
+  - "@heroui/shared-utils"
+  - "@prisma/client"
+  - "@prisma/engines"
+  - esbuild
+  - prisma
+  - sharp
