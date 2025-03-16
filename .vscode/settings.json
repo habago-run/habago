@@ -1,5 +1,10 @@
 {
-    "cSpell.words": [
-        "autoincrement"
-    ]
+  "cSpell.words": ["autoincrement"],
+  // 设置默认的格式化程序为 Prettier
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // 开启保存时自动格式化
+  "editor.formatOnSave": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

@@ -5,7 +5,7 @@ import "./home.css";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col justify-center bg-[url(/bg.svg)] bg-cover bg-center p-8 transition-colors duration-3000">
+    <main className="flex min-h-screen flex-col justify-center bg-[url(/bg.svg)] bg-cover bg-center p-8 duration-500">
       <div className="flex justify-end">
         <DarkModeSwitch />
       </div>
@@ -19,7 +19,7 @@ export default function Home() {
         <p className="mt-8 text-center text-slate-800 transition-colors dark:text-slate-100">
           尚未配置首页插件，去
           <Link
-            className="mx-1 font-bold text-blue-600 dark:text-blue-400 underline transition-colors"
+            className="mx-1 font-bold text-blue-600 underline transition-colors dark:text-blue-400"
             href="/admin/welcome"
           >
             后台管理
