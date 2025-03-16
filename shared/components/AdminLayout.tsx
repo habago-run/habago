@@ -32,9 +32,15 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   // 从 localStorage 中获取侧边栏状态
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(
-    window.localStorage.getItem("sidebarCollapsed") === "true",
-  );
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
+  // 在组件挂载后从 localStorage 中获取侧边栏状态
+  useEffect(() => {
+    const storedValue = localStorage.getItem("sidebarCollapsed");
+    if (storedValue) {
+      setIsSidebarCollapsed(storedValue === "true");
+    }
+  }, []);
 
   // 保存侧边栏状态到 localStorage
   useEffect(() => {
