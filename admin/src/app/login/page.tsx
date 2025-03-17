@@ -1,12 +1,22 @@
 "use client";
 
-import React, { useActionState } from "react";
+import React, { useActionState, useEffect } from "react";
 import { Button, Input } from "@heroui/react";
 import DarkModeSwitch from "@shared/components/DarkModeSwitch";
 import { signin } from "@/app/actions/auth";
+import { redirect, useSearchParams } from "next/navigation";
 
 const LoginPage: React.FC = () => {
-  const [state, action, pending] = useActionState(signin, { error: "" });
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/admin/welcome";
+  const [state, action, pending] = useActionState(signin, {});
+
+  useEffect(() => {
+    if (state.username) {
+      sessionStorage.setItem("username", state.username);
+      redirect(redirectTo);
+    }
+  }, [state.username]);
 
   return (
     <main className="flex min-h-screen flex-col bg-[url(/bg.svg)] bg-cover bg-center p-8 duration-500">
@@ -46,9 +56,9 @@ const LoginPage: React.FC = () => {
             />
           </div>
 
-          {state?.error && (
+          {state.error && (
             <p className="text-sm text-red-600 dark:text-red-500">
-              {state?.error}
+              {state.error}
             </p>
           )}
 

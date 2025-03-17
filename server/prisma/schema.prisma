@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./habago-server.db"
+  url      = "file:./habago-admin.db"
 }
 
 model Plugin {
@@ -33,4 +33,14 @@ model Route {
   updatedAt DateTime @updatedAt
   Plugin    Plugin   @relation(fields: [pluginId], references: [id])
   pluginId  Int
+}
+
+model SystemUser {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  salt      String
+  enabled   Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

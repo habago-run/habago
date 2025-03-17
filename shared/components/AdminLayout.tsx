@@ -1,27 +1,32 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Breadcrumbs, BreadcrumbItem } from "@heroui/breadcrumbs";
-import { Button } from "@heroui/button";
+import {
+  Breadcrumbs,
+  BreadcrumbItem,
+  Button,
+  Avatar,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Link as HeroLink,
+} from "@heroui/react";
 import {
   ChevronDoubleLeftIcon,
-  Cog8ToothIcon,
   HeartIcon,
-  PresentationChartBarIcon,
+  ArrowRightStartOnRectangleIcon,
+  PuzzlePieceIcon,
 } from "@heroicons/react/24/solid";
+import { redirect, usePathname } from "next/navigation";
+import Link from "next/link";
 
 import DarkModeSwitch from "./DarkModeSwitch";
 // 模拟侧边栏菜单项
 const sidebarMenu = [
   {
-    label: "Dashboard",
-    path: "/admin/dashboard",
-    icon: <PresentationChartBarIcon className="h-6 min-w-6" />,
-  },
-  {
-    label: "Settings",
-    path: "/admin/settings",
-    icon: <Cog8ToothIcon className="h-6 min-w-6" />,
+    label: "插件管理",
+    path: "/admin/plugins",
+    icon: <PuzzlePieceIcon className="h-6 min-w-6" />,
   },
   // 可根据需要添加更多菜单项
 ];
@@ -33,12 +38,18 @@ export default function AdminLayout({
 }) {
   // 从 localStorage 中获取侧边栏状态
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [username, setUsername] = useState("");
+  const pathname = usePathname();
 
   // 在组件挂载后从 localStorage 中获取侧边栏状态
   useEffect(() => {
     const storedValue = localStorage.getItem("sidebarCollapsed");
     if (storedValue) {
       setIsSidebarCollapsed(storedValue === "true");
+    }
+    const storedUsername = sessionStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
     }
   }, []);
 
@@ -49,6 +60,35 @@ export default function AdminLayout({
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
+  };
+
+  const breadcrumbItems = (() => {
+    const pathSegments = pathname.split("/").filter(Boolean);
+    const items = [];
+    let accumulatedPath = "";
+
+    // 路径映射表
+    const pathMap: Record<string, string> = {
+      admin: "管理后台",
+      plugins: "插件管理",
+      welcome: "欢迎页",
+    };
+
+    for (const segment of pathSegments) {
+      accumulatedPath += `/${segment}`;
+      items.push({
+        href: accumulatedPath,
+        label: pathMap[segment] || segment,
+      });
+    }
+    return items;
+  })();
+
+  const handleLogout = () => {
+    // 清空 sessionStorage
+    sessionStorage.clear();
+    // 跳转到登录页面
+    redirect("/login");
   };
 
   return (
@@ -76,7 +116,7 @@ export default function AdminLayout({
             <li key={index}>
               <a
                 href={item.path}
-                className="flex items-center px-4 py-2 hover:bg-gray-700"
+                className={`flex items-center px-4 py-2 hover:bg-gray-700`}
               >
                 {item.icon}
                 <span
@@ -111,13 +151,35 @@ export default function AdminLayout({
             />
           </Button>
           <Breadcrumbs className="mx-4 flex-1">
-            <BreadcrumbItem>Home</BreadcrumbItem>
-            <BreadcrumbItem>Music</BreadcrumbItem>
-            <BreadcrumbItem>Artist</BreadcrumbItem>
-            <BreadcrumbItem>Album</BreadcrumbItem>
-            <BreadcrumbItem>Song</BreadcrumbItem>
+            {breadcrumbItems.map((item, index) => (
+              <BreadcrumbItem key={index}>
+                <Link href={item.href}>{item.label}</Link>
+              </BreadcrumbItem>
+            ))}
           </Breadcrumbs>
           <DarkModeSwitch />
+          <Popover placement="bottom-end" showArrow color="danger">
+            <PopoverTrigger>
+              <Avatar
+                name={username}
+                size="sm"
+                color="primary"
+                className="ml-4 cursor-pointer"
+                as="button"
+              />
+            </PopoverTrigger>
+            <PopoverContent className="p-0">
+              <Button
+                color="danger"
+                startContent={
+                  <ArrowRightStartOnRectangleIcon className="h-4 w-4" />
+                }
+                onPress={handleLogout}
+              >
+                登出
+              </Button>
+            </PopoverContent>
+          </Popover>
         </div>
         {/* 内容区域 */}
         <div className="p-4">{children}</div>

@@ -1,3 +1,0 @@
-interface FormState {
-  error: string;
-}
