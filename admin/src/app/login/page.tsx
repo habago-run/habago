@@ -15,11 +15,11 @@ const LoginPage: React.FC = () => {
       </div>
       <div className="m-auto w-full max-w-md space-y-8">
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-bold text-gray-900 dark:text-gray-100">
+          <h2 className="mt-6 text-3xl font-bold text-gray-900 transition-colors dark:text-gray-100">
             欢迎回来
           </h2>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            请输入您的凭据以继续
+          <p className="mt-2 text-sm text-gray-600 transition-colors dark:text-gray-400">
+            请输入您的凭据以登录
           </p>
         </div>
 

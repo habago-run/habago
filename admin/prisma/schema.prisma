@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./habago-admin.db"
+}
+
+model SystemUser {
+  id           Int        @id @default(autoincrement())
+  username     String     @unique
+  password     String
+  salt         String
+  role         SystemRole @relation(fields: [systemRoleId], references: [id])
+  enabled      Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  systemRoleId Int
+}
+
+model SystemRole {
+  id          Int          @id @default(autoincrement())
+  name        String       @unique
+  permissions Json? // TODO 无法设置为空对象，可能是Prisma的bug
+  description String? // 可选添加描述字段
+  SystemUser  SystemUser[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([name]) // 添加索引优化查询
+}

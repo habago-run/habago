@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./habago-admin.db"
+  url      = "file:./habago-server.db"
 }
 
 model Plugin {

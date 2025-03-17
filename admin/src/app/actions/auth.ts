@@ -1,3 +1,5 @@
+"use server";
+
 export async function signin(
   state: FormState,
   formData: FormData,
@@ -5,5 +7,6 @@ export async function signin(
   console.log("signin->", formData);
   // delay 2s
   await new Promise((resolve) => setTimeout(resolve, 2000));
-  return { error: "Invalid email or password" };
+  state.error = "用户名或密码错误";
+  return state;
 }
