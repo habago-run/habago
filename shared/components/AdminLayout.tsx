@@ -9,7 +9,6 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  Link as HeroLink,
 } from "@heroui/react";
 import {
   ChevronDoubleLeftIcon,
@@ -21,6 +20,7 @@ import { redirect, usePathname } from "next/navigation";
 import Link from "next/link";
 
 import DarkModeSwitch from "./DarkModeSwitch";
+import { deleteSession } from "../lib/session";
 // 模拟侧边栏菜单项
 const sidebarMenu = [
   {
@@ -64,7 +64,7 @@ export default function AdminLayout({
 
   const breadcrumbItems = (() => {
     const pathSegments = pathname.split("/").filter(Boolean);
-    const items = [];
+    const items: { href: string; label: string }[] = [];
     let accumulatedPath = "";
 
     // 路径映射表
@@ -84,12 +84,13 @@ export default function AdminLayout({
     return items;
   })();
 
-  const handleLogout = () => {
+  function handleLogout() {
     // 清空 sessionStorage
     sessionStorage.clear();
+    deleteSession();
     // 跳转到登录页面
     redirect("/login");
-  };
+  }
 
   return (
     <div className="flex min-h-screen duration-500">

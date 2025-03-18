@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { decrypt } from "@/app/lib/session";
-import { cookies } from "next/headers";
+import { verifySession } from "@shared/lib/dal";
 
 export default async function middleware(req: NextRequest) {
   // 2. Check if the current route is protected or public
@@ -11,8 +10,7 @@ export default async function middleware(req: NextRequest) {
   }
 
   // 3. Decrypt the session from the cookie
-  const cookie = (await cookies()).get("session")?.value;
-  const session = await decrypt(cookie);
+  const session = await verifySession();
 
   // 4. Redirect to /login if the user is not authenticated
   if (!session?.id) {

@@ -2,7 +2,7 @@
 
 import { PrismaClient } from "@prisma/client";
 import crypto from "crypto";
-import { createSession } from "../lib/session";
+import { createSession } from "@shared/lib/session";
 
 type LoginState = {
   error?: string;
