@@ -7,6 +7,8 @@ on:
 jobs:
   build-lint-test:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: file:./habago-admin.db
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
