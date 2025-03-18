@@ -1,14 +1,10 @@
-import AdminLayout from '@shared/components/AdminLayout';
-import React from 'react';
+import AdminLayout from "@shared/components/AdminLayout";
+import React from "react";
 
 export default function Admin({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    return (
-        <AdminLayout>
-            {children}
-        </AdminLayout>
-    );
-};
+  return <AdminLayout>{children}</AdminLayout>;
+}

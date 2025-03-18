@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Providers } from "./providers";
 import "./globals.css";
@@ -13,11 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" suppressHydrationWarning>
-      <body
-        className='antialiased'
-      >
-        <Providers>{children}</Providers>
+    <html lang="zh-CN" suppressHydrationWarning className="transition-colors">
+      <body className="antialiased">
+        <Providers>
+          <Suspense>{children}</Suspense>
+        </Providers>
       </body>
     </html>
   );

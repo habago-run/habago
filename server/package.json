@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "start": "tsx prisma/seed.ts && tsx index.ts",
-    "build": "pnpm generate && pnpm migrate",
-    "generate": "prisma generate",
-    "migrate": "prisma migrate deploy",
+    "start": "tsx index.ts",
+    "build": "prisma generate && prisma migrate deploy && prisma db seed",
     "debug": "tsx --inspect index.ts"
   },
   "author": "wangyu@wycode.cn",
