@@ -12,7 +12,6 @@ import {
 } from "@heroui/react";
 import {
   ChevronDoubleLeftIcon,
-  HeartIcon,
   ArrowRightStartOnRectangleIcon,
   PuzzlePieceIcon,
 } from "@heroicons/react/24/solid";
@@ -21,11 +20,12 @@ import Link from "next/link";
 
 import DarkModeSwitch from "./DarkModeSwitch";
 import { deleteSession } from "../lib/session";
+import Sidebar from "./Sidebar";
 // 模拟侧边栏菜单项
 const sidebarMenu = [
   {
     label: "插件管理",
-    path: "/admin/plugins",
+    path: "/admin/plugin",
     icon: <PuzzlePieceIcon className="h-6 min-w-6" />,
   },
   // 可根据需要添加更多菜单项
@@ -46,6 +46,8 @@ export default function AdminLayout({
     const storedValue = localStorage.getItem("sidebarCollapsed");
     if (storedValue) {
       setIsSidebarCollapsed(storedValue === "true");
+    } else {
+      setIsSidebarCollapsed(window.innerWidth < 768);
     }
     const storedUsername = sessionStorage.getItem("username");
     if (storedUsername) {
@@ -59,6 +61,7 @@ export default function AdminLayout({
   }, [isSidebarCollapsed]);
 
   const toggleSidebar = () => {
+    console.log("toggleSidebar", isSidebarCollapsed);
     setIsSidebarCollapsed(!isSidebarCollapsed);
   };
 
@@ -70,7 +73,7 @@ export default function AdminLayout({
     // 路径映射表
     const pathMap: Record<string, string> = {
       admin: "管理后台",
-      plugins: "插件管理",
+      plugin: "插件管理",
       welcome: "欢迎页",
     };
 
@@ -95,45 +98,12 @@ export default function AdminLayout({
   return (
     <div className="flex min-h-screen duration-500">
       {/* 左侧侧边栏 */}
-      <div
-        className={`${
-          isSidebarCollapsed ? "w-16" : "w-64"
-        } border-r bg-slate-800 text-slate-100 transition-all duration-300 dark:border-gray-600 dark:bg-gray-950 dark:text-gray-50`}
-      >
-        <div className="flex items-center p-4">
-          <HeartIcon className="h-8 min-w-8" />
-          <h2
-            className={`${
-              isSidebarCollapsed
-                ? "transition-discrete hidden text-[0px] transition-all duration-300"
-                : "transition-discrete ml-2 text-nowrap text-xl font-bold transition-all duration-300"
-            } `}
-          >
-            Admin Panel
-          </h2>
-        </div>
-        <ul className="space-y-2">
-          {sidebarMenu.map((item, index) => (
-            <li key={index}>
-              <a
-                href={item.path}
-                className={`flex items-center px-4 py-2 hover:bg-gray-700`}
-              >
-                {item.icon}
-                <span
-                  className={`${
-                    isSidebarCollapsed
-                      ? "transition-discrete hidden text-[0px] transition-all duration-300"
-                      : "text-md transition-discrete ml-2 inline text-nowrap transition-all duration-300"
-                  }`}
-                >
-                  {item.label}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Sidebar
+        isCollapsed={isSidebarCollapsed}
+        onToggle={toggleSidebar}
+        menuItems={sidebarMenu}
+        currentPath={pathname}
+      />
       {/* 右侧内容区域 */}
       <div className="transition-background flex flex-1 flex-col bg-slate-200 dark:bg-gray-900">
         {/* 顶部面包屑 */}
