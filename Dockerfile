@@ -2,7 +2,6 @@ FROM node:22-alpine
 
 # 环境变量
 ENV NODE_ENV production
-ENV DATABASE_URL=file:/app/server/prisma/habago-admin.db
 # 设置工作目录
 WORKDIR /app
 # 复制项目文件
