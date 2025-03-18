@@ -34,4 +34,4 @@ jobs:
           push: true
           tags: |
             habago/admin:latest
-            habago/admin:${{ steps.read-version.outputs.VERSION }}  # 修正变量引用方式
+            habago/admin:${{ steps.read-version.outputs.VERSION }}
