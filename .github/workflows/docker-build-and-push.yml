@@ -24,15 +24,14 @@ jobs:
       - name: Read package.json version
         id: read-version
         run: |
-          echo "::set-output name=VERSION::$(jq -r .version package.json)"
-        shell: bash
+          echo "VERSION=$(jq -r .version package.json)" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: . # Docker 构建上下文
-          file: ./Dockerfile # Dockerfile 文件路径
-          push: true # 推送到 Docker Hub
+          context: .
+          file: ./Dockerfile
+          push: true
           tags: |
             habago/admin:latest
-            habago/admin:${{ steps.read-version.outputs.VERSION }}
+            habago/admin:${{ steps.read-version.outputs.VERSION }}  # 修正变量引用方式

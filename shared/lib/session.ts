@@ -38,7 +38,7 @@ export async function createSession(id: number, username: string) {
 
   cookieStore.set("session", session, {
     httpOnly: true,
-    secure: true,
+    secure: false, // TODO server currently only works on http
     expires: expiresAt,
     sameSite: "lax",
     path: "/",
