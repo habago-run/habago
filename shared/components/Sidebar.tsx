@@ -1,6 +1,5 @@
 "use client";
 
-// 新增防抖相关引用
 import React, { useCallback, useEffect, useRef } from "react";
 import { ChevronDoubleLeftIcon, HeartIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
@@ -96,11 +95,18 @@ export default function Sidebar({
             <li key={index}>
               <Link
                 href={item.path}
-                className={`flex items-center px-4 py-2 hover:bg-gray-700 ${currentPath === item.path ? "bg-slate-700 dark:bg-gray-800" : ""}`}
+                onClick={() => {
+                  if (window.innerWidth < 768) onToggle();
+                }}
+                className={`flex items-center px-4 py-2 hover:bg-gray-700 ${
+                  currentPath === item.path ? "bg-slate-700 dark:bg-gray-800" : ""
+                }`}
               >
                 {item.icon}
                 <span
-                  className={`${isCollapsed ? "hidden" : "text-md ml-2 overflow-hidden text-nowrap"}`}
+                  className={`${
+                    isCollapsed ? "hidden" : "text-md ml-2 overflow-hidden text-nowrap"
+                  }`}
                 >
                   {item.label}
                 </span>
