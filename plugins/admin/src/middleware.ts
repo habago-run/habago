@@ -6,7 +6,9 @@ export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
   console.log("Accessing path:", path);
   if (path === "/admin") {
-    return NextResponse.redirect(new URL("/admin/welcome", req.nextUrl));
+    return NextResponse.redirect(
+      new URL("/plugins/admin/welcome", req.nextUrl),
+    );
   }
 
   // 3. Decrypt the session from the cookie
@@ -16,7 +18,10 @@ export default async function middleware(req: NextRequest) {
   if (!session?.id) {
     console.log("Redirecting to login due to unauthenticated access");
     return NextResponse.redirect(
-      new URL(`/login?redirect=${encodeURIComponent(path)}`, req.nextUrl),
+      new URL(
+        `/plugins/login?redirect=${encodeURIComponent(path)}`,
+        req.nextUrl,
+      ),
     );
   }
 

@@ -19,7 +19,7 @@ const LoginPage: React.FC = () => {
   }, [state.username]);
 
   return (
-    <main className="flex min-h-screen flex-col bg-[url(/bg.svg)] bg-cover bg-center p-8 duration-500">
+    <main className="flex min-h-screen flex-col bg-[url(./img/bg.svg)] bg-cover bg-center p-8 duration-500">
       <div className="flex justify-end">
         <DarkModeSwitch />
       </div>

@@ -13,13 +13,12 @@ datasource db {
 model Plugin {
   id          Int      @id @default(autoincrement())
   name        String   @unique
-  imageName   String
+  url         String?
   author      String
-  description String
+  description String?
   version     String
   default     Boolean
   enabled     Boolean
-  server      String
   routes      Route[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
