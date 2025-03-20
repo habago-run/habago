@@ -1,11 +1,11 @@
 {
     "name": "habago",
     "private": true,
-    "version": "0.1.6",
+    "version": "0.1.7",
     "scripts": {
-        "dev": "pnpm -C admin dev",
+        "dev": "pnpm -C plugins/admin dev",
         "build": "pnpm -r --parallel build",
-        "build:admin": "pnpm -C admin build",
+        "build:admin": "pnpm -C plugins/admin build",
         "build:server": "pnpm -C server build",
         "lint": "pnpm -r --parallel lint",
         "test": "pnpm -r --parallel test",
@@ -19,5 +19,5 @@
         "@types/node": "^20",
         "typescript": "^5"
     },
-    "packageManager": "pnpm@10.6.4"
+    "packageManager": "pnpm@10.6.5"
 }

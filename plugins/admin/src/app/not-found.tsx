@@ -1,10 +1,9 @@
 import Link from "next/link";
-
 import DarkModeSwitch from "@shared/components/DarkModeSwitch";
 
-export default function Home() {
+export default function NotFoundPage() {
   return (
-    <main className="flex min-h-screen flex-col justify-center bg-[url(/bg.svg)] bg-cover bg-center p-8 duration-500">
+    <main className="flex min-h-screen flex-col justify-center bg-[url(./img/bg.svg)] bg-cover bg-center p-8 duration-500">
       <div className="flex justify-end">
         <DarkModeSwitch />
       </div>
@@ -16,7 +15,7 @@ export default function Home() {
           面向AI的下一代全栈框架，0停机更新功能。
         </h2>
         <p className="mt-8 text-center text-slate-800 transition-colors dark:text-slate-100">
-          尚未配置首页插件，去
+          此页面尚未被插件注册，去
           <Link
             className="mx-1 font-bold text-blue-600 underline transition-colors dark:text-blue-400"
             href="/admin/welcome"
@@ -25,7 +24,7 @@ export default function Home() {
           </Link>
         </p>
         <p className="mt-2 text-center text-slate-800 transition-colors dark:text-slate-100">
-          可以在插件管理页面安装首页插件
+          可以在插件管理页面安装相关插件
         </p>
       </div>
     </main>

@@ -2,50 +2,25 @@ import { createServer, IncomingMessage, ServerResponse } from "http";
 import { parse, UrlWithParsedQuery } from "url";
 import next from "next";
 import { PrismaClient, Plugin, Route } from "@prisma/client";
-import httpProxy from "http-proxy";
+import { RequestHandler } from "next/dist/server/next";
 
-const app = next({ dev: false, dir: "../admin" });
-const handle = app.getRequestHandler();
-const proxy = httpProxy.createProxyServer();
 const prisma = new PrismaClient();
-let plugins: Plugin[] = [];
+const plugins: Map<string, Plugin> = new Map();
+const handles: Map<string, RequestHandler> = new Map();
 
 async function start() {
   await loadPlugins();
-  await app.prepare();
   createServer((req: IncomingMessage, res: ServerResponse) => {
     const parsedUrl: UrlWithParsedQuery = parse(req.url as string, true);
-    console.log("access received:", parsedUrl.pathname);
-
-    const proxyHistory = req.headers["x-proxy-history"];
-    let matchingRoute = proxyHistory
-      ? null
-      : findMatchingRoute(plugins, parsedUrl);
+    let matchingRoute = findMatchingRoute(plugins, parsedUrl);
     if (matchingRoute) {
-      // 找到匹配的 route，转发请求到 plugin 提供的 server
-      const target = `http://${matchingRoute.server}`;
-      // 检查请求头中是否已经包含当前要代理的服务器地址
-      const proxyHistory = req.headers["x-proxy-history"] as string | undefined;
-      if (proxyHistory && proxyHistory.includes(matchingRoute.server)) {
-        console.error("Circular proxy detected:", matchingRoute.server);
-        res.statusCode = 500;
-        res.end("Circular proxy detected");
-      } else {
-        // 更新请求头中的代理历史记录
-        const newProxyHistory = proxyHistory
-          ? `${proxyHistory},${matchingRoute.server}`
-          : matchingRoute.server;
-        req.headers["x-proxy-history"] = newProxyHistory;
-
-        proxy.web(req, res, { target }, (err: Error) => {
-          console.error("Proxy error:", err);
-          res.statusCode = 500;
-          res.end("Proxy error");
-        });
-      }
+      console.log("accessing plugin:", matchingRoute.name);
+      const handle = handles.get(matchingRoute.name);
+      handle!(req, res, parsedUrl);
     } else {
-      // 没有找到匹配的 route，使用 handle 处理请求
-      handle(req, res, parsedUrl);
+      console.log("accessing fallback to admin");
+      const handle = handles.get("admin");
+      handle!(req, res, parsedUrl);
     }
   })
     .on("error", (err: Error) => {
@@ -58,24 +33,39 @@ async function start() {
 }
 
 async function loadPlugins() {
-  plugins = await prisma.plugin.findMany({
-    include: {
-      routes: true,
-    },
+  const appPrepareJobs: Promise<any>[] = [];
+  (
+    await prisma.plugin.findMany({
+      include: {
+        routes: true,
+      },
+    })
+  ).forEach((plugin) => {
+    const name = plugin.name.toLowerCase();
+    plugins.set(name, plugin);
+    const app = next({ dev: false, dir: `../plugins/${name}` });
+    appPrepareJobs.push(app.prepare());
+    const handle = app.getRequestHandler();
+    handles.set(name, handle);
   });
-  console.log("loaded plugins:", plugins);
+  await Promise.all(appPrepareJobs);
 }
 
 function findMatchingRoute(
-  plugins: Plugin[],
+  plugins: Map<string, Plugin>, // 修改参数类型为 Map
   parsedUrl: UrlWithParsedQuery
-): { server: string; route: Route } | null {
-  for (const plugin of plugins) {
+): { name: string; route: Route } | null {
+  // 遍历 Map 的 values
+  for (const plugin of plugins.entries()) {
     // @ts-ignore
-    for (const route of plugin.routes) {
-      if (route.path === parsedUrl.pathname) {
+    for (const route of plugin[1].routes) {
+      // 添加路径匹配逻辑增强
+      if (
+        route.path === parsedUrl.pathname ||
+        parsedUrl.pathname?.startsWith(route.path + "/")
+      ) {
         return {
-          server: plugin.server,
+          name: plugin[0],
           route: route,
         };
       }

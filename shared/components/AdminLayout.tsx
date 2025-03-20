@@ -14,6 +14,7 @@ import {
   ChevronDoubleLeftIcon,
   ArrowRightStartOnRectangleIcon,
   PuzzlePieceIcon,
+  UserIcon,
 } from "@heroicons/react/24/solid";
 import { redirect, usePathname } from "next/navigation";
 import Link from "next/link";
@@ -27,6 +28,11 @@ const sidebarMenu = [
     label: "插件管理",
     path: "/admin/plugin",
     icon: <PuzzlePieceIcon className="h-6 min-w-6" />,
+  },
+  {
+    label: "系统用户管理",
+    path: "/admin/system-user",
+    icon: <UserIcon className="h-6 min-w-6" />,
   },
   // 可根据需要添加更多菜单项
 ];
@@ -74,6 +80,7 @@ export default function AdminLayout({
     const pathMap: Record<string, string> = {
       admin: "管理后台",
       plugin: "插件管理",
+      "system-user": "系统用户管理",
       welcome: "欢迎页",
     };
 
