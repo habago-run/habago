@@ -30,8 +30,14 @@ const columns = [
   },
 ];
 
+const actions = {
+  create: true,
+  update: true,
+  delete: true,
+};
+
 export default async function Plugin() {
   const dataPromise = prisma.plugin.findMany();
 
-  return <Curd columns={columns} dataPromise={dataPromise} />;
+  return <Curd columns={columns} dataPromise={dataPromise} actions={actions} />;
 }

@@ -19,13 +19,11 @@ async function insertAdminPlugin() {
   const plugin = await prisma.plugin.create({
     data: {
       name: "Admin",
-      imageName: "habago/admin",
       description: "基础管理系统",
       author: "habago",
       version: "1.0.0",
       default: true,
       enabled: true,
-      server: "localhost:3001",
     },
   });
   console.log("seed successfully", plugin);

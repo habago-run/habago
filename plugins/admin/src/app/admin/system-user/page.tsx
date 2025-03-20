@@ -22,8 +22,14 @@ const columns = [
   },
 ];
 
+const actions = {
+  create: true,
+  update: true,
+  delete: true,
+};
+
 export default async function SystemUser() {
   const dataPromise = prisma.systemUser.findMany();
 
-  return <Curd dataPromise={dataPromise} columns={columns} />;
+  return <Curd dataPromise={dataPromise} columns={columns} actions={actions} />;
 }
