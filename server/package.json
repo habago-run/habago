@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "start": "prisma migrate deploy && tsx index.ts",
+    "start": "prisma migrate deploy && prisma db seed && tsx index.ts",
     "build": "prisma generate && prisma migrate deploy && prisma db seed",
     "debug": "tsx --inspect index.ts"
   },
