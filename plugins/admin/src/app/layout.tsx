@@ -2,6 +2,10 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Providers } from "./providers";
 import "./globals.css";
+import { Inter } from "next/font/google";
+import BeianInfo from "../components/BeianInfo";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Habago | 哈巴狗",
@@ -15,10 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" suppressHydrationWarning className="transition-colors">
-      <body className="antialiased">
+      <body className={inter.className}>
         <Providers>
           <Suspense>{children}</Suspense>
         </Providers>
+        <BeianInfo />
       </body>
     </html>
   );
